@@ -56,14 +56,38 @@ app.MapGet("/api/posts/{id}", (DataService dataService, long id) =>
 
 app.MapPut("/api/posts/{id}/upvote", (DataService dataService, long id) =>
 {
-    dataService.upVote(id);
-    return Results.Ok();
+    try
+    {
+        var updatedThread = dataService.upVote(id);
+        if (updatedThread == null)
+        {
+            return Results.NotFound();
+        }
+        return Results.Ok(updatedThread);
+    }
+    catch (Exception ex)
+    {
+        // Log the exception
+        return Results.Problem($"An error occurred while downvoting: {ex.Message}");
+    }
 });
 
 app.MapPut("/api/posts/{id}/downvote", (DataService dataService, long id) =>
 {
-    dataService.downVote(id);
-    return Results.Ok();
+    try
+    {
+        var updatedThread = dataService.downVote(id);
+        if (updatedThread == null)
+        {
+            return Results.NotFound();
+        }
+        return Results.Ok(updatedThread);
+    }
+    catch (Exception ex)
+    {
+        // Log the exception
+        return Results.Problem($"An error occurred while downvoting: {ex.Message}");
+    }
 });
 app.MapPut("/api/posts/{id}/comments/{commentid}/upvote", (DataService dataService, long id, long commentid) =>
 {

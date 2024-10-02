@@ -81,7 +81,7 @@ public class DataService
     {
         var thread = db.Threads.Include(t => t.Comments).FirstOrDefault(t => t.ThreadsId == id);
         var comment = thread.Comments.FirstOrDefault(c => c.CommentId == commentId);
-        comment.VoteCount--;
+        comment.VoteCount++;
         db.SaveChanges();
     }
     public void addThread(Threads thread)

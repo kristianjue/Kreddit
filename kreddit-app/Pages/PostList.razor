@@ -48,13 +48,21 @@ else
         Console.WriteLine(posts.Length);
     }
 
-    private async void Upvote(long id)
+    private async Task Upvote(long id)
     {
         var updatedPost = await apiService.UpvotePost(id);
+        await RefreshPosts();
     }
 
-    private async void Downvote(long id)
+    private async Task Downvote(long id)
     {
-        Console.WriteLine("Not implemented 😪");
+        var updatedPost = await apiService.DownvotePost(id);
+        await RefreshPosts();
+    }
+
+    private async Task RefreshPosts()
+    {
+        posts = await apiService.GetPosts();
+        StateHasChanged();
     }
 }
