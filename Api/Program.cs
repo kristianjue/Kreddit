@@ -72,6 +72,7 @@ app.MapPut("/api/posts/{id}/upvote", (DataService dataService, long id) =>
     }
 });
 
+// Downvote a post
 app.MapPut("/api/posts/{id}/downvote", (DataService dataService, long id) =>
 {
     try
@@ -89,16 +90,47 @@ app.MapPut("/api/posts/{id}/downvote", (DataService dataService, long id) =>
         return Results.Problem($"An error occurred while downvoting: {ex.Message}");
     }
 });
+
+// Upvote a comment
 app.MapPut("/api/posts/{id}/comments/{commentid}/upvote", (DataService dataService, long id, long commentid) =>
 {
-    dataService.upVoteComment(id, commentid);
-    return Results.Ok();
+    try
+    {
+        dataService.upVoteComment(id, commentid);
+        var updatedThread = dataService.getThreadById(id); // Return the updated thread with comments
+        if (updatedThread == null)
+        {
+            return Results.NotFound();
+        }
+        return Results.Ok(updatedThread);
+    }
+    catch (Exception ex)
+    {
+        // Log the exception
+        return Results.Problem($"An error occurred while upvoting the comment: {ex.Message}");
+    }
 });
+
+// Downvote a comment
 app.MapPut("/api/posts/{id}/comments/{commentid}/downvote", (DataService dataService, long id, long commentid) =>
 {
-    dataService.downVoteComment(id, commentid);
-    return Results.Ok();
+    try
+    {
+        dataService.downVoteComment(id, commentid);
+        var updatedThread = dataService.getThreadById(id); // Return the updated thread with comments
+        if (updatedThread == null)
+        {
+            return Results.NotFound();
+        }
+        return Results.Ok(updatedThread);
+    }
+    catch (Exception ex)
+    {
+        // Log the exception
+        return Results.Problem($"An error occurred while downvoting the comment: {ex.Message}");
+    }
 });
+
 app.MapPost("/api/posts", (DataService dataService, Threads thread) =>
 {
     dataService.addThread(thread);

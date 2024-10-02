@@ -54,8 +54,13 @@ public class DataService
     
     public Threads getThreadById(long id)
     {
-        return db.Threads.Include(t => t.User).Include(t => t.Comments).FirstOrDefault(t => t.ThreadsId == id);
+        return db.Threads
+            .Include(t => t.User)          // Include User for Threads
+            .Include(t => t.Comments)
+            .ThenInclude(c => c.User)  // Include User for Comments
+            .FirstOrDefault(t => t.ThreadsId == id);
     }
+
     public Threads upVote(long id)
     {
         var thread = db.Threads.FirstOrDefault(t => t.ThreadsId == id);
@@ -74,14 +79,14 @@ public class DataService
     {
         var thread = db.Threads.Include(t => t.Comments).FirstOrDefault(t => t.ThreadsId == id);
         var comment = thread.Comments.FirstOrDefault(c => c.CommentId == commentId);
-        comment.VoteCount++;
+        comment.Upvotes++;
         db.SaveChanges();
     }
     public void downVoteComment(long id, long commentId)
     {
         var thread = db.Threads.Include(t => t.Comments).FirstOrDefault(t => t.ThreadsId == id);
         var comment = thread.Comments.FirstOrDefault(c => c.CommentId == commentId);
-        comment.VoteCount++;
+        comment.Downvotes++;
         db.SaveChanges();
     }
     public void addThread(Threads thread)
