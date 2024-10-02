@@ -1,0 +1,12 @@
+/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/shared/bin/Debug/net6.0/shared.deps.json
+/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/shared/bin/Debug/net6.0/shared.dll
+/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/shared/bin/Debug/net6.0/shared.pdb
+/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/shared/obj/Debug/net6.0/shared.GeneratedMSBuildEditorConfig.editorconfig
+/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/shared/obj/Debug/net6.0/shared.AssemblyInfoInputs.cache
+/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/shared/obj/Debug/net6.0/shared.AssemblyInfo.cs
+/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/shared/obj/Debug/net6.0/shared.csproj.CoreCompileInputs.cache
+/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/shared/obj/Debug/net6.0/shared.sourcelink.json
+/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/shared/obj/Debug/net6.0/shared.dll
+/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/shared/obj/Debug/net6.0/refint/shared.dll
+/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/shared/obj/Debug/net6.0/shared.pdb
+/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/shared/obj/Debug/net6.0/ref/shared.dll
