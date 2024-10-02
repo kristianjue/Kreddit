@@ -1,10 +1,9 @@
-using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 
-using miniprojekt.Data;
-using miniprojekt.Model;
+using Api.Data;
+using Api.Model;
 
-namespace miniprojekt.Service;
+namespace Api.Service;
 
 public class DataService
 {

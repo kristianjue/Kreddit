@@ -1,6 +1,7 @@
-using miniprojekt.Model;
+using Api.Model;
 
-namespace miniprojekt.Model
+
+namespace Api.Model
 {
     public class Threads
     {

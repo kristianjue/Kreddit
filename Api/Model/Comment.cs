@@ -1,4 +1,7 @@
-namespace miniprojekt.Model
+using Api.Model;
+
+
+namespace Api.Model
 {
     public class Comment
     {

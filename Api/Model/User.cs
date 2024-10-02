@@ -1,4 +1,4 @@
-namespace miniprojekt.Model
+namespace Api.Model
 {
     public class User
     {
