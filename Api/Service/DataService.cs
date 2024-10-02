@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 
 using Api.Data;
-using Api.Model;
+using shared.Model;
 
 namespace Api.Service;
 
@@ -23,9 +23,9 @@ public class DataService
         var User3 = new User("Kristian");
         
         
-        var thread1 = new Threads("Cykel","Se min fede cykel Kristian" ,User2);
-        var thread2 = new Threads("Hej", "Jeg savner dig", User);
-        var thread3 = new Threads("Bil", "Se min nye bil", User3);
+        var thread1 = new Threads("Cykel","Se min fede cykel Kristian" ,User2,0,0  );
+        var thread2 = new Threads("Hej", "Jeg savner dig", User,0,0);
+        var thread3 = new Threads("Bil", "Se min nye bil", User3,0,0);
         
         db.Threads.Add(thread1);
         db.Threads.Add(thread2);
@@ -56,17 +56,19 @@ public class DataService
     {
         return db.Threads.Include(t => t.User).Include(t => t.Comments).FirstOrDefault(t => t.ThreadsId == id);
     }
-    public void upVote(long id)
+    public Threads upVote(long id)
     {
         var thread = db.Threads.FirstOrDefault(t => t.ThreadsId == id);
-        thread.VoteCount++;
+        thread.Upvotes++;
         db.SaveChanges();
+        return thread;
     }
-    public void downVote(long id)
+    public Threads downVote(long id)
     {
         var thread = db.Threads.FirstOrDefault(t => t.ThreadsId == id);
-        thread.VoteCount--;
+        thread.Downvotes++;
         db.SaveChanges();
+        return thread;
     }
     public void upVoteComment(long id, long commentId)
     {

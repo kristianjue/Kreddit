@@ -668,6 +668,16 @@
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
         }
+      },
+      "shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/shared.dll": {}
+        }
       }
     }
   },
@@ -1469,6 +1479,11 @@
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "shared/1.0.0": {
+      "type": "project",
+      "path": "../shared/shared.csproj",
+      "msbuildProject": "../shared/shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -1476,7 +1491,8 @@
       "Microsoft.EntityFrameworkCore >= 6.0.33",
       "Microsoft.EntityFrameworkCore.Design >= 6.0.33",
       "Microsoft.EntityFrameworkCore.Sqlite >= 6.0.33",
-      "Swashbuckle.AspNetCore >= 6.2.3"
+      "Swashbuckle.AspNetCore >= 6.2.3",
+      "shared >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1504,7 +1520,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/shared/shared.csproj": {
+              "projectPath": "/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/shared/shared.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

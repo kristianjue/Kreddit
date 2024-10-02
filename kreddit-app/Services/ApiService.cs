@@ -19,16 +19,16 @@ public class ApiService
         this.baseAPI = configuration["base_api"];
     }
 
-    public async Task<Post[]> GetPosts()
+    public async Task<Threads[]> GetPosts()
     {
         string url = $"{baseAPI}posts/";
-        return await http.GetFromJsonAsync<Post[]>(url);
+        return await http.GetFromJsonAsync<Threads[]>(url);
     }
 
-    public async Task<Post> GetPost(int id)
+    public async Task<Threads> GetPost(long id)
     {
-        string url = $"{baseAPI}posts/{id}/";
-        return await http.GetFromJsonAsync<Post>(url);
+        string url = $"{baseAPI}posts/{id}";
+        return await http.GetFromJsonAsync<Threads>(url);
     }
 
     public async Task<Comment> CreateComment(string content, int postId, int userId)
@@ -50,7 +50,7 @@ public class ApiService
         return newComment;
     }
 
-    public async Task<Post> UpvotePost(int id)
+    public async Task<Threads> UpvotePost(long id)
     {
         string url = $"{baseAPI}posts/{id}/upvote/";
 
@@ -61,7 +61,7 @@ public class ApiService
         string json = msg.Content.ReadAsStringAsync().Result;
 
         // Deserialize the JSON string to a Post object
-        Post? updatedPost = JsonSerializer.Deserialize<Post>(json, new JsonSerializerOptions {
+        Threads? updatedPost = JsonSerializer.Deserialize<Threads>(json, new JsonSerializerOptions {
             PropertyNameCaseInsensitive = true // Ignore case when matching JSON properties to C# properties
         });
 

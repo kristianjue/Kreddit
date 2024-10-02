@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 
 using Api.Data;
-using Api.Model;
+using shared.Model;
 using Api.Service;
 
 var builder = WebApplication.CreateBuilder(args);

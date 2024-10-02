@@ -17,7 +17,7 @@ namespace Api.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.33");
 
-            modelBuilder.Entity("Api.Model.Comment", b =>
+            modelBuilder.Entity("shared.Model.Comment", b =>
                 {
                     b.Property<long>("CommentId")
                         .ValueGeneratedOnAdd()
@@ -30,7 +30,13 @@ namespace Api.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Downvotes")
+                        .HasColumnType("INTEGER");
+
                     b.Property<long?>("ThreadsId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Upvotes")
                         .HasColumnType("INTEGER");
 
                     b.Property<long>("UserId")
@@ -48,7 +54,7 @@ namespace Api.Migrations
                     b.ToTable("Comment");
                 });
 
-            modelBuilder.Entity("Api.Model.Threads", b =>
+            modelBuilder.Entity("shared.Model.Threads", b =>
                 {
                     b.Property<long>("ThreadsId")
                         .ValueGeneratedOnAdd()
@@ -61,9 +67,15 @@ namespace Api.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Downvotes")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Upvotes")
+                        .HasColumnType("INTEGER");
 
                     b.Property<long>("UserId")
                         .HasColumnType("INTEGER");
@@ -78,7 +90,7 @@ namespace Api.Migrations
                     b.ToTable("Threads");
                 });
 
-            modelBuilder.Entity("Api.Model.User", b =>
+            modelBuilder.Entity("shared.Model.User", b =>
                 {
                     b.Property<long>("UserId")
                         .ValueGeneratedOnAdd()
@@ -93,13 +105,13 @@ namespace Api.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("Api.Model.Comment", b =>
+            modelBuilder.Entity("shared.Model.Comment", b =>
                 {
-                    b.HasOne("Api.Model.Threads", null)
+                    b.HasOne("shared.Model.Threads", null)
                         .WithMany("Comments")
                         .HasForeignKey("ThreadsId");
 
-                    b.HasOne("Api.Model.User", "User")
+                    b.HasOne("shared.Model.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -108,9 +120,9 @@ namespace Api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Api.Model.Threads", b =>
+            modelBuilder.Entity("shared.Model.Threads", b =>
                 {
-                    b.HasOne("Api.Model.User", "User")
+                    b.HasOne("shared.Model.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -119,7 +131,7 @@ namespace Api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Api.Model.Threads", b =>
+            modelBuilder.Entity("shared.Model.Threads", b =>
                 {
                     b.Navigation("Comments");
                 });

@@ -29,6 +29,8 @@ namespace Api.Migrations
                     ThreadsId = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(type: "TEXT", nullable: false),
+                    Upvotes = table.Column<int>(type: "INTEGER", nullable: false),
+                    Downvotes = table.Column<int>(type: "INTEGER", nullable: false),
                     UserId = table.Column<long>(type: "INTEGER", nullable: false),
                     Content = table.Column<string>(type: "TEXT", nullable: false),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
@@ -52,6 +54,8 @@ namespace Api.Migrations
                     CommentId = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Content = table.Column<string>(type: "TEXT", nullable: false),
+                    Upvotes = table.Column<int>(type: "INTEGER", nullable: false),
+                    Downvotes = table.Column<int>(type: "INTEGER", nullable: false),
                     UserId = table.Column<long>(type: "INTEGER", nullable: false),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
                     VoteCount = table.Column<int>(type: "INTEGER", nullable: false),

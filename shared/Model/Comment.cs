@@ -1,23 +1,39 @@
-namespace shared.Model;
+using shared.Model;
 
-public class Comment
+
+namespace shared.Model
 {
-    public int Id { get; set; }
-    public string Content { get; set; }
-    public int Upvotes { get; set; }
-    public int Downvotes { get; set; }
-    public User User { get; set; }
-    public Comment(string content = "", int upvotes = 0, int downvotes = 0, User user = null)
+    public class Comment
     {
-        Content = content;
-        Upvotes = upvotes;
-        Downvotes = downvotes;
-        User = user;
-    }
-    public Comment() {
-        Id = 0;
-        Content = "";
-        Upvotes = 0;
-        Downvotes = 0;
+        public long CommentId { get; set; }
+        public string Content { get; set; }
+        public int Upvotes { get; set; }
+        
+        public int Downvotes { get; set; }
+        public User User { get; set; }
+        public DateTime Date { get; set; }
+        public int VoteCount { get; set; }
+
+        public Comment()
+        {
+            Date = DateTime.Now;
+        }
+        // Konstruktør
+        public Comment(string content, User user)
+        {
+            Content = content;
+            User = user;
+            Date = DateTime.Now;
+            Upvotes = 0;
+            Downvotes = 0;
+        }
+        
+        public Comment(string content)
+        {
+            Content = content;
+            Date = DateTime.Now;
+            Upvotes = 0;
+            Downvotes = 0;
+        }
     }
 }

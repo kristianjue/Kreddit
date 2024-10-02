@@ -1,12 +1,15 @@
-using Api.Model;
+using shared.Model;
 
 
-namespace Api.Model
+namespace shared.Model
 {
     public class Threads
     {
         public long ThreadsId { get; set; }
         public string Title { get; set; }
+        public int Upvotes { get; set; }
+        
+        public int Downvotes { get; set; }
         public User User { get; set; }
         public List<Comment> Comments { get; set; }
         
@@ -14,23 +17,31 @@ namespace Api.Model
         public DateTime Date { get; set; }
         public int VoteCount { get; set; }
 
+        
+        public Threads()
+        {
+            Comments = new List<Comment>();
+            Date = DateTime.Now;
+        }
         // Konstruktør
-        public Threads(string title, string content, User user)
+        public Threads(string title, string content, User user,int upvotes, int downvotes)
         {
             Title = title;
             Content = content;
             User = user;
             Comments = new List<Comment>();
             Date = DateTime.Now;
-            VoteCount = 0;
+            Upvotes = 0;
+            Downvotes = 0;
         }
-        public Threads(string title, string content)
+        public Threads(string title, string content,int upvotes, int downvotes)
         {
             Title = title;
             Content = content;
             Comments = new List<Comment>();
             Date = DateTime.Now;
-            VoteCount = 0;
+            Upvotes = 0;
+            Downvotes = 0;
         }
     }
 }

@@ -67,3 +67,5 @@
 /Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/Api/obj/Debug/net6.0/Api.pdb
 /Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/Api/obj/Debug/net6.0/Api.genruntimeconfig.cache
 /Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/Api/obj/Debug/net6.0/ref/Api.dll
+/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/Api/bin/Debug/net6.0/shared.dll
+/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/Api/bin/Debug/net6.0/shared.pdb
