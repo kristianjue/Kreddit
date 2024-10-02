@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 
-using miniprojekt.Data;
-using miniprojekt.Model;
-using miniprojekt.Service;
+using Api.Data;
+using Api.Model;
+using Api.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
