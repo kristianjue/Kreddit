@@ -1,6 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 
+using miniprojekt.Data;
+using miniprojekt.Model;
+using miniprojekt.Service;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Sætter CORS så API'en kan bruges fra andre domæner

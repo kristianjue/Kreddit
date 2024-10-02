@@ -415,7 +415,7 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Microsoft.NET.Sdk.WebAssembly.Pack/8.0.2": {
+      "Microsoft.NET.Sdk.WebAssembly.Pack/8.0.4": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.Sdk.WebAssembly.Pack.props": {},
@@ -943,7 +943,7 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Microsoft.NET.Sdk.WebAssembly.Pack/8.0.2": {
+      "Microsoft.NET.Sdk.WebAssembly.Pack/8.0.4": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.Sdk.WebAssembly.Pack.props": {},
@@ -1703,10 +1703,10 @@
         "tools/net7.0/illink.runtimeconfig.json"
       ]
     },
-    "Microsoft.NET.Sdk.WebAssembly.Pack/8.0.2": {
-      "sha512": "sq7Zs4E699WDIbFloiK/qmp9JtL8vpzMGILjnzYjkY4O1qj6z1Iu36dl4xWXrkVsKDnxw8CZ7NDqsntq5FFPgg==",
+    "Microsoft.NET.Sdk.WebAssembly.Pack/8.0.4": {
+      "sha512": "D4kK4zXW43HvIX0lG9rBGGVzNtY6WwbCGAHJEi6iChU5Dgw8VenJS7Jc1g9Yy8pq4mEQA5PCcZicA16hGTjRpw==",
       "type": "package",
-      "path": "microsoft.net.sdk.webassembly.pack/8.0.2",
+      "path": "microsoft.net.sdk.webassembly.pack/8.0.4",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -1734,7 +1734,7 @@
         "build/Microsoft.NET.Sdk.WebAssembly.Pack.props",
         "build/Microsoft.NET.Sdk.WebAssembly.Pack.targets",
         "build/Wasm.web.config",
-        "microsoft.net.sdk.webassembly.pack.8.0.2.nupkg.sha512",
+        "microsoft.net.sdk.webassembly.pack.8.0.4.nupkg.sha512",
         "microsoft.net.sdk.webassembly.pack.nuspec",
         "tools/net472/Microsoft.Bcl.AsyncInterfaces.dll",
         "tools/net472/Microsoft.Build.dll",
@@ -1939,38 +1939,38 @@
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 6.0.9",
       "Microsoft.NET.ILLink.Analyzers >= 7.0.100-1.23211.1",
       "Microsoft.NET.ILLink.Tasks >= 7.0.100-1.23211.1",
-      "Microsoft.NET.Sdk.WebAssembly.Pack >= 8.0.2",
+      "Microsoft.NET.Sdk.WebAssembly.Pack >= 8.0.4",
       "shared >= 1.0.0"
     ]
   },
   "packageFolders": {
-    "/Users/kristianjuelsgaard/.nuget/packages/": {}
+    "/Users/rasmusolesen/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/kristianjuelsgaard/Downloads/HeltNyGithub/Kreddit/kreddit-app/kreddit-app.csproj",
+      "projectUniqueName": "/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/kreddit-app/kreddit-app.csproj",
       "projectName": "kreddit-app",
-      "projectPath": "/Users/kristianjuelsgaard/Downloads/HeltNyGithub/Kreddit/kreddit-app/kreddit-app.csproj",
-      "packagesPath": "/Users/kristianjuelsgaard/.nuget/packages/",
-      "outputPath": "/Users/kristianjuelsgaard/Downloads/HeltNyGithub/Kreddit/kreddit-app/obj/",
+      "projectPath": "/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/kreddit-app/kreddit-app.csproj",
+      "packagesPath": "/Users/rasmusolesen/.nuget/packages/",
+      "outputPath": "/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/kreddit-app/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/kristianjuelsgaard/.nuget/NuGet/NuGet.Config"
+        "/Users/rasmusolesen/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {},
-        "https://nuget.pkg.github.com/RiverOnlineGroup/index.json": {}
+        "/usr/local/share/dotnet/library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/Users/kristianjuelsgaard/Downloads/HeltNyGithub/Kreddit/shared/shared.csproj": {
-              "projectPath": "/Users/kristianjuelsgaard/Downloads/HeltNyGithub/Kreddit/shared/shared.csproj"
+            "/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/shared/shared.csproj": {
+              "projectPath": "/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/shared/shared.csproj"
             }
           }
         }
@@ -2009,7 +2009,7 @@
           "Microsoft.NET.Sdk.WebAssembly.Pack": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[8.0.2, )",
+            "version": "[8.0.4, )",
             "autoReferenced": true
           }
         },
@@ -2027,15 +2027,15 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.27, 6.0.27]"
+            "version": "[6.0.29, 6.0.29]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.27, 6.0.27]"
+            "version": "[6.0.29, 6.0.29]"
           },
           {
             "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
-            "version": "[6.0.27, 6.0.27]"
+            "version": "[6.0.29, 6.0.29]"
           }
         ],
         "frameworkReferences": {
@@ -2043,7 +2043,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.201/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.204/RuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {

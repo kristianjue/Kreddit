@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "ei2fqvS5O19TDdGRplpPi2YPEd9tVja9J+hDjc+8Dy86ZPBZ5OV0wOgBcYgXg/1WnWRfz7KVgVbu++BZiDLkbQ==",
+  "dgSpecHash": "sypBQDXkqqhqBI/0YHmcE4eWkScXe/0cu7KSOdh+4xflB707K3zLeYU4x2Eqt90xpETYA3dlRjDV9Q/8UI0q1Q==",
   "success": true,
-  "projectFilePath": "/Users/kristianjuelsgaard/Downloads/HeltNyGithub/Kreddit/shared/shared.csproj",
+  "projectFilePath": "/Users/rasmusolesen/RiderProjects/Softwarearkitektur/Miniprojekt-1/shared/shared.csproj",
   "expectedPackageFiles": [
-    "/Users/kristianjuelsgaard/.nuget/packages/microsoft.netcore.app.ref/6.0.27/microsoft.netcore.app.ref.6.0.27.nupkg.sha512",
-    "/Users/kristianjuelsgaard/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.27/microsoft.aspnetcore.app.ref.6.0.27.nupkg.sha512"
+    "/Users/rasmusolesen/.nuget/packages/microsoft.netcore.app.ref/6.0.29/microsoft.netcore.app.ref.6.0.29.nupkg.sha512",
+    "/Users/rasmusolesen/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.29/microsoft.aspnetcore.app.ref.6.0.29.nupkg.sha512"
   ],
   "logs": []
 }
