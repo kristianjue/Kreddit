@@ -3,7 +3,9 @@ using System.Text.Json;
 
 using Api.Data;
 using shared.Model;
+using shared.DTO;
 using Api.Service;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -136,15 +138,26 @@ app.MapPost("/api/posts", (DataService dataService, Threads thread) =>
     dataService.addThread(thread);
     return Results.Ok();
 });
-app.MapPost("/api/posts/{id}/comments", (DataService dataService, long id, Comment comment) =>
-{
-    if (comment.User == null)
-    {
-        return Results.BadRequest("User information is required.");
-    }
 
-    dataService.AddComment(comment, id);
-    return Results.Ok();
+app.MapPost("/api/posts/{id}/comments", (DataService dataService, long id, CommentRequest request) =>
+{
+    // Opret en ny bruger baseret på request.UserName
+    var user = new User { UserName = request.UserName };
+
+    // Hent kun de nødvendige felter fra request.Comment (content) og tilføj brugeren
+    var comment = new Comment
+    {
+        Content = request.Comment.Content,
+        User = user // Tildel den oprettede bruger til kommentaren
+    };
+
+    // Tilføj kommentaren til tråden ved hjælp af DataService
+    dataService.AddComment(comment, user, id);
+
+    return Results.Ok(comment); // Returner den nye kommentar
 });
+
+
+
 
 app.Run();

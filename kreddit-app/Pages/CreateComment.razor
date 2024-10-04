@@ -3,14 +3,14 @@
 @inject ApiService apiService
 
 <div>
-    <br/>
+    <br />
     <h3>Write a comment</h3>
 
     <!-- Comment input field -->
-    <input placeholder="Content" type="input" id="content" @bind-value="content"/>
+    <input placeholder="Content" type="input" id="content" @bind-value="content" />
 
     <!-- Username input field -->
-    <input placeholder="Username" type="input" id="username" @bind-value="username"/>
+    <input placeholder="Username" type="input" id="username" @bind-value="username" />
 
     <button id="createPostButton" type="button" @onclick="CreateNewComment">Post comment</button>
 </div>
@@ -18,32 +18,25 @@
 @code {
     [Parameter]
     public int PostId { get; set; }
-    
+    [Parameter]
+    public EventCallback OnCommentAdded { get; set; } // Event to notify parent component
     private string? content;
     private string? username;
 
-    private async void CreateNewComment()
+    private async Task CreateNewComment()
     {
         if (string.IsNullOrWhiteSpace(content) || string.IsNullOrWhiteSpace(username))
         {
             return; // Ensure both fields are filled
         }
 
-        // Create a new User object based on the username input
-        var user = new User(username); // Create a new User object
-
-        // Create a new Comment object with the content and User object
-        var comment = new Comment
-        {
-            Content = content,
-            User = user // Assign the User object to the Comment
-        };
-
-        // Call the API to create the comment
-        await apiService.CreateComment(comment, PostId);
+        // Call the API to create the comment, passing only the content and username
+        await apiService.CreateComment(content, username, PostId);
 
         // Clear fields after submission
         content = string.Empty;
         username = string.Empty;
+        
+        await OnCommentAdded.InvokeAsync();
     }
 }

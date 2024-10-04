@@ -62,7 +62,7 @@ else
 
     <!-- This demonstrates how to pass in PostId to the component 'CreateComment'. See how 
          it is used in the file CreateComment.razor -->
-    <CreateComment PostId=@PostId></CreateComment>
+    <CreateComment PostId=@PostId OnCommentAdded="RefreshPosts"></CreateComment>
 }
 
 @code {

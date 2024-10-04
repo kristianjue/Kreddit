@@ -1,7 +1,7 @@
 using System.Net.Http.Json;
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
-
+using shared.DTO;
 using shared.Model;
 
 namespace kreddit_app.Data;
@@ -31,18 +31,35 @@ public class ApiService
         return await http.GetFromJsonAsync<Threads>(url);
     }
 
-    public async Task<Comment> CreateComment(Comment comment, int postId)
+    public async Task<Comment> CreateComment(String content, string username, int postId)
     {
         string url = $"{baseAPI}posts/{postId}/comments";
-        HttpResponseMessage msg = await http.PostAsJsonAsync(url, comment);
-        msg.EnsureSuccessStatusCode(); // Check for successful status code
+    
+        // Create an anonymous object to send to the API
+        var commentData = new CommentRequest
+        {
+            UserName = username,
+            Comment = new Comment { Content = content }
+        };
+
+        await http.PostAsJsonAsync($"api/posts/{postId}/comments", commentData);
+    
+        // Make a POST request to the API with the comment data
+        HttpResponseMessage msg = await http.PostAsJsonAsync(url, commentData);
+    
+        // Ensure the response is successful
+        msg.EnsureSuccessStatusCode();
+    
+        // Read the response content
         string json = await msg.Content.ReadAsStringAsync();
     
+        // Deserialize the response into a Comment object
         Comment newComment = JsonSerializer.Deserialize<Comment>(json, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
         });
-        return newComment;
+
+        return newComment; // Return the created comment
     }
 
 
