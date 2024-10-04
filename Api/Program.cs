@@ -133,11 +133,12 @@ app.MapPut("/api/posts/{id}/comments/{commentid}/downvote", (DataService dataSer
     }
 });
 
-app.MapPost("/api/posts", (DataService dataService, Threads thread) =>
+app.MapPost("/api/posts", (DataService dataService, ThreadRequest request) =>
 {
-    dataService.addThread(thread);
-    return Results.Ok();
+    var newThread = dataService.AddThread(request.Thread.Title, request.Thread.Content, request.UserName);
+    return Results.Ok(newThread);
 });
+
 
 app.MapPost("/api/posts/{id}/comments", (DataService dataService, long id, CommentRequest request) =>
 {

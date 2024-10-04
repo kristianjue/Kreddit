@@ -34,14 +34,6 @@ namespace shared.Model
             Upvotes = 0;
             Downvotes = 0;
         }
-        public Threads(string title, string content,int upvotes, int downvotes)
-        {
-            Title = title;
-            Content = content;
-            Comments = new List<Comment>();
-            Date = DateTime.Now;
-            Upvotes = 0;
-            Downvotes = 0;
-        }
+       
     }
 }

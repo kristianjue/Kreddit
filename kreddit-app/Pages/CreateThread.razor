@@ -1,0 +1,39 @@
+@using kreddit_app.Data;
+@inject ApiService apiService
+
+<div>
+    <br/>
+    <h3>Create a New Thread</h3>
+    <input placeholder="Title" type="input" @bind-value="title"/>
+    <input placeholder="Content" type="input" @bind-value="content"/>
+    <input placeholder="Username" type="input" @bind-value="username" />
+    <button @onclick="SubmitThread">Create Thread</button>
+</div>
+
+@code {
+
+    [Parameter] 
+    public EventCallback OnThreadAdded { get; set; } // Event to notify parent component
+
+    private string? title;
+    private string? content;
+    private string? username;
+
+    private async Task SubmitThread()
+    {
+        if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(content))
+        {
+            return; // Ensure fields are filled
+        }
+
+        // Call the API service to create the thread
+        await apiService.CreateThread(title, content, username);
+
+        // Clear fields after submission
+        title = string.Empty;
+        content = string.Empty;
+        username = string.Empty;
+
+        await OnThreadAdded.InvokeAsync();
+    }
+}

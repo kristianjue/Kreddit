@@ -18,6 +18,8 @@ else
             <th>Title</th>
             <th>Content</th>
             <th colspan="3">Votes</th>
+            <th>Date</th>
+            <th>Author</th>
         </tr>
         @foreach (var post in posts)
         {
@@ -31,12 +33,15 @@ else
                 <td>@(post.Upvotes - post.Downvotes)</td>
                 <td><button @onclick="() => Upvote(post.ThreadsId)">Upvote</button></td>
                 <td><button @onclick="() => Downvote(post.ThreadsId)">Downvote</button></td>
+                <Td>@(post.Date)</Td>
+                <td>@post.User.UserName</td>
             </tr>
         }
     </table>
 
     <br/>
 }
+<CreateThread OnThreadAdded="RefreshPosts"></CreateThread>
 
 @code {
     private Threads[]? posts;

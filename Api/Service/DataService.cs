@@ -89,10 +89,14 @@ public class DataService
         comment.Downvotes++;
         db.SaveChanges();
     }
-    public void addThread(Threads thread)
+    public Threads AddThread(string title, string content, string username)
     {
+        var user = new User(username); // Assuming the user creation is done here
+
+        var thread = new Threads(title, content, user, 0, 0); // Using 5 parameter constructor
         db.Threads.Add(thread);
         db.SaveChanges();
+        return thread;
     }
 
 

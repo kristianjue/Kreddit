@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 using shared.DTO;
@@ -11,7 +12,7 @@ public class ApiService
     private readonly HttpClient http;
     private readonly IConfiguration configuration;
     private readonly string baseAPI = "";
-
+    
     public ApiService(HttpClient http, IConfiguration configuration)
     {
         this.http = http;
@@ -61,10 +62,7 @@ public class ApiService
 
         return newComment; // Return the created comment
     }
-
-
     
-
     public async Task<Threads> UpvotePost(long id)
     {
         string url = $"{baseAPI}posts/{id}/upvote/";
@@ -140,5 +138,33 @@ public class ApiService
         // Return the updated comment (vote decreased)
         return updatedComment;
     }
+    public async Task<Threads> CreateThread(string title, string content, string username)
+    {
+        string url = $"{baseAPI}posts";
+
+        var threadData = new ThreadRequest
+        {
+            UserName = username,
+            Thread = new Threads
+            {
+                Title = title,
+                Content = content
+            }
+        };
+
+        HttpResponseMessage msg = await http.PostAsJsonAsync(url, threadData);
+
+        msg.EnsureSuccessStatusCode();
+
+        string json = await msg.Content.ReadAsStringAsync();
+
+        Threads newThread = JsonSerializer.Deserialize<Threads>(json, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        });
+
+        return newThread;
+    }
+
 
 }
