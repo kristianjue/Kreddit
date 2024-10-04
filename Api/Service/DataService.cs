@@ -94,14 +94,40 @@ public class DataService
         db.Threads.Add(thread);
         db.SaveChanges();
     }
-    
-    
-    public void addComment(Comment comment, long id)
+
+
+    public void AddComment(Comment comment, long threadId)
     {
-        var thread = db.Threads.Include(t => t.Comments).FirstOrDefault(t => t.ThreadsId == id);
-        thread.Comments.Add(comment);
-        db.SaveChanges();
+        var thread = db.Threads
+            .Include(t => t.Comments)
+            .FirstOrDefault(t => t.ThreadsId == threadId);
+
+        if (thread != null)
+        {
+            // Check if the user already exists in the thread's comments
+            var existingUser = thread.Comments
+                .Select(c => c.User)
+                .FirstOrDefault(u => u.UserName == comment.User.UserName);
+
+            if (existingUser == null)
+            {
+                // If the user doesn't exist in the comments, use the new user
+                comment.User = comment.User;
+            }
+            else
+            {
+                // If the user exists, use the existing user
+                comment.User = existingUser;
+            }
+
+            thread.Comments.Add(comment);
+            db.SaveChanges();
+        }
+        else
+        {
+            throw new KeyNotFoundException($"Thread with ID {threadId} not found.");
+        }
+
+
     }
-   
-    
 }

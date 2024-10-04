@@ -138,7 +138,12 @@ app.MapPost("/api/posts", (DataService dataService, Threads thread) =>
 });
 app.MapPost("/api/posts/{id}/comments", (DataService dataService, long id, Comment comment) =>
 {
-    dataService.addComment(comment, id);
+    if (comment.User == null)
+    {
+        return Results.BadRequest("User information is required.");
+    }
+
+    dataService.AddComment(comment, id);
     return Results.Ok();
 });
 

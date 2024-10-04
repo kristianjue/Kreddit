@@ -1,0 +1,49 @@
+@using kreddit_app.Data
+@using shared.Model
+@inject ApiService apiService
+
+<div>
+    <br/>
+    <h3>Write a comment</h3>
+
+    <!-- Comment input field -->
+    <input placeholder="Content" type="input" id="content" @bind-value="content"/>
+
+    <!-- Username input field -->
+    <input placeholder="Username" type="input" id="username" @bind-value="username"/>
+
+    <button id="createPostButton" type="button" @onclick="CreateNewComment">Post comment</button>
+</div>
+
+@code {
+    [Parameter]
+    public int PostId { get; set; }
+    
+    private string? content;
+    private string? username;
+
+    private async void CreateNewComment()
+    {
+        if (string.IsNullOrWhiteSpace(content) || string.IsNullOrWhiteSpace(username))
+        {
+            return; // Ensure both fields are filled
+        }
+
+        // Create a new User object based on the username input
+        var user = new User(username); // Create a new User object
+
+        // Create a new Comment object with the content and User object
+        var comment = new Comment
+        {
+            Content = content,
+            User = user // Assign the User object to the Comment
+        };
+
+        // Call the API to create the comment
+        await apiService.CreateComment(comment, PostId);
+
+        // Clear fields after submission
+        content = string.Empty;
+        username = string.Empty;
+    }
+}
