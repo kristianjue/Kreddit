@@ -58,46 +58,31 @@ app.MapGet("/api/posts/{id}", (DataService dataService, long id) =>
 
 app.MapPut("/api/posts/{id}/upvote", (DataService dataService, long id) =>
 {
-    try
-    {
         var updatedThread = dataService.upVote(id);
         if (updatedThread == null)
         {
             return Results.NotFound();
         }
         return Results.Ok(updatedThread);
-    }
-    catch (Exception ex)
-    {
-        // Log the exception
-        return Results.Problem($"An error occurred while downvoting: {ex.Message}");
-    }
 });
 
 // Downvote a post
 app.MapPut("/api/posts/{id}/downvote", (DataService dataService, long id) =>
 {
-    try
-    {
+    
         var updatedThread = dataService.downVote(id);
         if (updatedThread == null)
         {
             return Results.NotFound();
         }
         return Results.Ok(updatedThread);
-    }
-    catch (Exception ex)
-    {
-        // Log the exception
-        return Results.Problem($"An error occurred while downvoting: {ex.Message}");
-    }
+        
 });
 
 // Upvote a comment
 app.MapPut("/api/posts/{id}/comments/{commentid}/upvote", (DataService dataService, long id, long commentid) =>
 {
-    try
-    {
+    
         dataService.upVoteComment(id, commentid);
         var updatedThread = dataService.getThreadById(id); // Return the updated thread with comments
         if (updatedThread == null)
@@ -105,32 +90,21 @@ app.MapPut("/api/posts/{id}/comments/{commentid}/upvote", (DataService dataServi
             return Results.NotFound();
         }
         return Results.Ok(updatedThread);
-    }
-    catch (Exception ex)
-    {
-        // Log the exception
-        return Results.Problem($"An error occurred while upvoting the comment: {ex.Message}");
-    }
 });
 
 // Downvote a comment
 app.MapPut("/api/posts/{id}/comments/{commentid}/downvote", (DataService dataService, long id, long commentid) =>
 {
-    try
-    {
+    
         dataService.downVoteComment(id, commentid);
-        var updatedThread = dataService.getThreadById(id); // Return the updated thread with comments
+        var updatedThread = dataService.getThreadById(id); // Return the updated thread with comments 
         if (updatedThread == null)
         {
             return Results.NotFound();
         }
         return Results.Ok(updatedThread);
-    }
-    catch (Exception ex)
-    {
-        // Log the exception
-        return Results.Problem($"An error occurred while downvoting the comment: {ex.Message}");
-    }
+    
+   
 });
 
 app.MapPost("/api/posts", (DataService dataService, ThreadRequest request) =>
@@ -157,8 +131,6 @@ app.MapPost("/api/posts/{id}/comments", (DataService dataService, long id, Comme
 
     return Results.Ok(comment); // Returner den nye kommentar
 });
-
-
 
 
 app.Run();

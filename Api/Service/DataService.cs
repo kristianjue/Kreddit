@@ -91,9 +91,9 @@ public class DataService
     }
     public Threads AddThread(string title, string content, string username)
     {
-        var user = new User(username); // Assuming the user creation is done here
+        var user = new User(username);
 
-        var thread = new Threads(title, content, user, 0, 0); // Using 5 parameter constructor
+        var thread = new Threads(title, content, user, 0, 0); 
         db.Threads.Add(thread);
         db.SaveChanges();
         return thread;
@@ -108,7 +108,7 @@ public class DataService
         if (thread != null)
         {
             // Assign the user to the comment
-            comment.User = user; // Assign the new User object to the comment
+            comment.User = user; 
         
             // Add the comment to the thread's comments
             thread.Comments.Add(comment);
