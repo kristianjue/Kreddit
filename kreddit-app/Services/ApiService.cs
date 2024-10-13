@@ -21,14 +21,29 @@ public class ApiService
     public async Task<Threads[]> GetPosts()
     {
         string url = $"{_baseApi}posts/";
-        return await _http.GetFromJsonAsync<Threads[]>(url);
+        var posts = await _http.GetFromJsonAsync<Threads[]>(url);
+    
+        if (posts == null)
+        {
+            return Array.Empty<Threads>(); // Return empty array if null
+        }
+
+        return posts;
     }
 
     public async Task<Threads> GetPost(long id)
     {
         string url = $"{_baseApi}posts/{id}";
-        return await _http.GetFromJsonAsync<Threads>(url);
+        var post = await _http.GetFromJsonAsync<Threads>(url);
+    
+        if (post == null)
+        {
+            return new Threads(); // Return a new Threads instance if null
+        }
+
+        return post;
     }
+
 
     public async Task<Comment> CreateComment(String content, string username, int postId)
     {
@@ -53,10 +68,15 @@ public class ApiService
         string json = await msg.Content.ReadAsStringAsync();
     
         // Deserialize the response into a Comment object
-        Comment newComment = JsonSerializer.Deserialize<Comment>(json, new JsonSerializerOptions
+        Comment? newComment = JsonSerializer.Deserialize<Comment>(json, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
         });
+
+        if (newComment == null)
+        {
+            throw new Exception("Failed to create comment: received null response from API.");
+        }
 
         return newComment; // Return the created comment
     }
@@ -75,7 +95,11 @@ public class ApiService
         Threads? updatedPost = JsonSerializer.Deserialize<Threads>(json, new JsonSerializerOptions {
             PropertyNameCaseInsensitive = true 
         });
-
+        
+        if (updatedPost == null)
+        {
+            throw new Exception("Failed to upvote post: received null response from API.");
+        }
         // Return the updated post (vote increased)
         return updatedPost;
     }
@@ -94,6 +118,11 @@ public class ApiService
             PropertyNameCaseInsensitive = true 
         });
 
+        if (updatedPost == null)
+        {
+            throw new Exception("Failed to upvote post: received null response from API.");
+        }
+        
         // Return the updated post (vote decreased)
         return updatedPost;
     }
@@ -111,7 +140,10 @@ public class ApiService
         Comment? updatedComment = JsonSerializer.Deserialize<Comment>(json, new JsonSerializerOptions {
             PropertyNameCaseInsensitive = true 
         });
-
+        if (updatedComment == null)
+        {
+            throw new Exception("Failed to upvote post: received null response from API.");
+        }
         // Return the updated comment (vote increased)
         return updatedComment;
     }
@@ -132,7 +164,10 @@ public class ApiService
         Comment? updatedComment = JsonSerializer.Deserialize<Comment>(json, new JsonSerializerOptions {
             PropertyNameCaseInsensitive = true 
         });
-
+        if (updatedComment == null)
+        {
+            throw new Exception("Failed to upvote post: received null response from API.");
+        }
         // Return the updated comment (vote decreased)
         return updatedComment;
     }
@@ -156,11 +191,14 @@ public class ApiService
 
         string json = await msg.Content.ReadAsStringAsync();
 
-        Threads newThread = JsonSerializer.Deserialize<Threads>(json, new JsonSerializerOptions
+        Threads? newThread = JsonSerializer.Deserialize<Threads>(json, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
         });
-
+        if (newThread == null)
+        {
+            throw new Exception("Failed to upvote post: received null response from API.");
+        }
         return newThread;
     }
 
