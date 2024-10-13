@@ -1,5 +1,3 @@
-using shared.Model;
-
 
 namespace shared.Model
 {
@@ -14,11 +12,16 @@ namespace shared.Model
         public DateTime Date { get; set; }
         public int VoteCount { get; set; }
 
+        // Default constructor
         public Comment()
         {
+            Content = string.Empty; 
+            User = new User(); 
             Date = DateTime.Now;
+            Upvotes = 0;
+            Downvotes = 0;
         }
-        // Konstruktør
+        // Constructor with parameters
         public Comment(string content, User user)
         {
             Content = content;
@@ -28,12 +31,5 @@ namespace shared.Model
             Downvotes = 0;
         }
         
-        public Comment(string content)
-        {
-            Content = content;
-            Date = DateTime.Now;
-            Upvotes = 0;
-            Downvotes = 0;
-        }
     }
 }

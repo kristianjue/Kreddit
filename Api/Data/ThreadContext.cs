@@ -1,7 +1,6 @@
 using shared.Model;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace Api.Data;
 
 public class ThreadContext : DbContext

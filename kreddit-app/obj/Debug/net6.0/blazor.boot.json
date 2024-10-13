@@ -1,7 +1,7 @@
 {
   "entryAssembly": "kreddit-app",
   "resources": {
-    "hash": "sha256-A+ykiPNmmuHG/wSz7ILZu/wx9eNSMoztt10G+KqOlNY=",
+    "hash": "sha256-85eTFw4UTLaq3zj+w1/P9vcdhfhHaTNa0Uzn5rwFpL0=",
     "runtime": {
       "dotnet.6.0.29.ir9tpswa46.js": "sha256-BV1wi9qAMCmpfZ+aXPplngN3cFgig0bFqWhNad3R5Lo=",
       "dotnet.timezones.blat": "sha256-csJ9EjcYXaAQrYK1S5WLY51YBLmp7zcST7wH0IDbvgg=",
@@ -200,12 +200,12 @@
       "mscorlib.dll": "sha256-Dq0ZWn1Dzc/UAPz/NgCNG1XJX8rhBI5c5/jpgKXDF6U=",
       "netstandard.dll": "sha256-7BfApPnkIIxITLLgPNqPbmPRBWu7G/WB0oxp+DOlY0w=",
       "System.Private.CoreLib.dll": "sha256-/IakvE+iRudxlHbw47DUw2QUemsywWIigQHWe/Pxv7U=",
-      "shared.dll": "sha256-tHpfOxN+/o+1CoYYXx88u7q6HVGgMbzPv7eLaXB4gXI=",
-      "kreddit-app.dll": "sha256-QOM32xiy6AQEvyCbxRw69B1i/cBPU17Z9MIHHhwzShE="
+      "shared.dll": "sha256-cjcmIReUTYRjLSt+uMejY+lWTx4SY5KIR2fIpLU2eLc=",
+      "kreddit-app.dll": "sha256-iW01WSoO2bg4l+M8E6XtLS/F3lyME9l1GenC0mU1p7Y="
     },
     "pdb": {
-      "shared.pdb": "sha256-dbb0Y8kblPiO14RX4FsdH+wa78Oxis06yajeZUxhyJY=",
-      "kreddit-app.pdb": "sha256-3uS9IsvQZ65JN2XABg8WZy+eATnUkqsQaqHqlLThdzo="
+      "shared.pdb": "sha256-qO1ZB76OLUvHJkiyTtGD4muOqN8i/9bEbUdK00WiGIQ=",
+      "kreddit-app.pdb": "sha256-93TamfBbH2EgEzW/u6UhLNcK+h5IVgHa4FJToVJtCFI="
     },
     "runtimeAssets": {
       "dotnet.wasm": {

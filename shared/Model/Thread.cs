@@ -1,5 +1,3 @@
-using shared.Model;
-
 
 namespace shared.Model
 {
@@ -17,14 +15,19 @@ namespace shared.Model
         public DateTime Date { get; set; }
         public int VoteCount { get; set; }
 
-        
+        // Default constructor
         public Threads()
         {
+            Title = string.Empty;
+            Content = string.Empty; 
+            User = new User();
             Comments = new List<Comment>();
             Date = DateTime.Now;
+            Upvotes = 0;
+            Downvotes = 0;
         }
-        // Konstruktør
-        public Threads(string title, string content, User user,int upvotes, int downvotes)
+        // Constructor with parameters
+        public Threads(string title, string content, User user)
         {
             Title = title;
             Content = content;

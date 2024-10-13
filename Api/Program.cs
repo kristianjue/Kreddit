@@ -1,30 +1,27 @@
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json;
-
 using Api.Data;
 using shared.Model;
 using shared.DTO;
 using Api.Service;
-using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Sætter CORS så API'en kan bruges fra andre domæner
-var AllowSomeStuff = "_AllowSomeStuff";
+// Set up CORS to allow the API to be used from other domains
+var allowSomeStuff = "_allowSomeStuff";
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: AllowSomeStuff, builder => {
-        builder.AllowAnyOrigin()
+    options.AddPolicy(name: allowSomeStuff, policybuilder => {
+        policybuilder.AllowAnyOrigin()
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
 });
 
-// Tilføj DbContext factory som service.
+// Add DbContext factory as a service
 builder.Services.AddDbContext<ThreadContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("ContextSQLite")));
 
-// Tilføj DataService så den kan bruges i endpoints
+// Add DataService so it can be used in endpoints
 builder.Services.AddScoped<DataService>();
 
 var app = builder.Build();
@@ -32,105 +29,101 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var dataService = scope.ServiceProvider.GetRequiredService<DataService>();
-    dataService.SeedData(); // Fylder data på, hvis databasen er tom. Ellers ikke.
+    dataService.SeedData(); // Populate data if the database is empty. Otherwise, do nothing.
 }
 
 app.UseHttpsRedirection();
-app.UseCors(AllowSomeStuff);
+app.UseCors(allowSomeStuff);
 
-
-// Middlware der kører før hver request. Sætter ContentType for alle responses til "JSON".
+// Middleware that runs before each request. Sets ContentType for all responses to "JSON".
 app.Use(async (context, next) =>
 {
     context.Response.ContentType = "application/json; charset=utf-8";
     await next(context);
 });
 
+// GET: Retrieve all posts
 app.MapGet("/api/posts", (DataService dataService) =>
 {
-    return dataService.getAllThreads();
+    return dataService.GetAllThreads();
 });
 
+// GET: Retrieve a specific post by ID
 app.MapGet("/api/posts/{id}", (DataService dataService, long id) =>
 {
-    return dataService.getThreadById(id);
+    return dataService.GetThreadById(id);
 });
 
+// PUT: Upvote a post
 app.MapPut("/api/posts/{id}/upvote", (DataService dataService, long id) =>
 {
-        var updatedThread = dataService.upVote(id);
-        if (updatedThread == null)
-        {
-            return Results.NotFound();
-        }
-        return Results.Ok(updatedThread);
+    var updatedThread = dataService.UpVote(id);
+    if (updatedThread == null)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(updatedThread);
 });
 
-// Downvote a post
+// PUT: Downvote a post
 app.MapPut("/api/posts/{id}/downvote", (DataService dataService, long id) =>
 {
-    
-        var updatedThread = dataService.downVote(id);
-        if (updatedThread == null)
-        {
-            return Results.NotFound();
-        }
-        return Results.Ok(updatedThread);
-        
+    var updatedThread = dataService.DownVote(id);
+    if (updatedThread == null)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(updatedThread);
 });
 
-// Upvote a comment
+// PUT: Upvote a comment
 app.MapPut("/api/posts/{id}/comments/{commentid}/upvote", (DataService dataService, long id, long commentid) =>
 {
-    
-        dataService.upVoteComment(id, commentid);
-        var updatedThread = dataService.getThreadById(id); // Return the updated thread with comments
-        if (updatedThread == null)
-        {
-            return Results.NotFound();
-        }
-        return Results.Ok(updatedThread);
+    bool success = dataService.UpVoteComment(id, commentid);
+    if (!success)
+    {
+        return Results.NotFound();
+    }
+    var updatedThread = dataService.GetThreadById(id); // Return the updated thread with comments
+    return Results.Ok(updatedThread);
 });
 
-// Downvote a comment
+// PUT: Downvote a comment
 app.MapPut("/api/posts/{id}/comments/{commentid}/downvote", (DataService dataService, long id, long commentid) =>
 {
-    
-        dataService.downVoteComment(id, commentid);
-        var updatedThread = dataService.getThreadById(id); // Return the updated thread with comments 
-        if (updatedThread == null)
-        {
-            return Results.NotFound();
-        }
-        return Results.Ok(updatedThread);
-    
-   
+    bool success = dataService.DownVoteComment(id, commentid);
+    if (!success)
+    {
+        return Results.NotFound();
+    }
+    var updatedThread = dataService.GetThreadById(id); // Return the updated thread with comments 
+    return Results.Ok(updatedThread);
 });
 
+// POST: Create a new post
 app.MapPost("/api/posts", (DataService dataService, ThreadRequest request) =>
 {
     var newThread = dataService.AddThread(request.Thread.Title, request.Thread.Content, request.UserName);
     return Results.Ok(newThread);
 });
 
-
+// POST: Add a comment to a post
 app.MapPost("/api/posts/{id}/comments", (DataService dataService, long id, CommentRequest request) =>
 {
-    // Opret en ny bruger baseret på request.UserName
+    // Create a new user based on request.UserName
     var user = new User { UserName = request.UserName };
 
-    // Hent kun de nødvendige felter fra request.Comment (content) og tilføj brugeren
+    // Get only the necessary fields from request.Comment (content) and add the user
     var comment = new Comment
     {
         Content = request.Comment.Content,
-        User = user // Tildel den oprettede bruger til kommentaren
+        User = user // Assign the created user to the comment
     };
 
-    // Tilføj kommentaren til tråden ved hjælp af DataService
+    // Add the comment to the thread using DataService
     dataService.AddComment(comment, user, id);
 
-    return Results.Ok(comment); // Returner den nye kommentar
+    return Results.Ok(comment); // Return the new comment
 });
-
 
 app.Run();

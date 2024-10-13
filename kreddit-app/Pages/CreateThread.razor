@@ -4,9 +4,9 @@
 <div>
     <br/>
     <h3>Create a New Thread</h3>
-    <input placeholder="Title" type="input" @bind-value="title"/>
-    <input placeholder="Content" type="input" @bind-value="content"/>
-    <input placeholder="Username" type="input" @bind-value="username" />
+    <input placeholder="Title" type="text" @bind-value="_title"/>
+    <input placeholder="Content" type="text" @bind-value="_content"/>
+    <input placeholder="Username" type="text" @bind-value="_username" />
     <button @onclick="SubmitThread">Create Thread</button>
 </div>
 
@@ -15,24 +15,24 @@
     [Parameter] 
     public EventCallback OnThreadAdded { get; set; } // Event to notify parent component
 
-    private string? title;
-    private string? content;
-    private string? username;
+    private string? _title;
+    private string? _content;
+    private string? _username;
 
     private async Task SubmitThread()
     {
-        if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(content))
+        if (string.IsNullOrWhiteSpace(_title) || string.IsNullOrWhiteSpace(_content) || string.IsNullOrWhiteSpace(_username))
         {
             return; // Ensure fields are filled
         }
 
         // Call the API service to create the thread
-        await apiService.CreateThread(title, content, username);
+        await apiService.CreateThread(_title, _content, _username);
 
         // Clear fields after submission
-        title = string.Empty;
-        content = string.Empty;
-        username = string.Empty;
+        _title = string.Empty;
+        _content = string.Empty;
+        _username = string.Empty;
 
         await OnThreadAdded.InvokeAsync();
     }

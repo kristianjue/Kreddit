@@ -7,7 +7,7 @@
 @using Microsoft.Extensions.Configuration
 @inject IConfiguration Configuration
 
-@if (posts == null)
+@if (_posts == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -21,7 +21,7 @@ else
             <th>Date</th>
             <th>Author</th>
         </tr>
-        @foreach (var post in posts)
+        @foreach (var post in _posts)
         {
             <tr>
                 <!-- 
@@ -33,7 +33,7 @@ else
                 <td>@(post.Upvotes - post.Downvotes)</td>
                 <td><button @onclick="() => Upvote(post.ThreadsId)">Upvote</button></td>
                 <td><button @onclick="() => Downvote(post.ThreadsId)">Downvote</button></td>
-                <Td>@(post.Date)</Td>
+                <td>@(post.Date)</td>
                 <td>@post.User.UserName</td>
             </tr>
         }
@@ -44,30 +44,29 @@ else
 <CreateThread OnThreadAdded="RefreshPosts"></CreateThread>
 
 @code {
-    private Threads[]? posts;
-    private Threads? votePost;
+    private Threads[]? _posts;
 
     protected override async Task OnInitializedAsync()
     {
-        posts = await apiService.GetPosts();
-        Console.WriteLine(posts.Length);
+        _posts = await apiService.GetPosts();
+        Console.WriteLine(_posts.Length);
     }
 
     private async Task Upvote(long id)
     {
-        var updatedPost = await apiService.UpvotePost(id);
+        await apiService.UpvotePost(id);
         await RefreshPosts();
     }
 
     private async Task Downvote(long id)
     {
-        var updatedPost = await apiService.DownvotePost(id);
+        await apiService.DownvotePost(id);
         await RefreshPosts();
     }
 
     private async Task RefreshPosts()
     {
-        posts = await apiService.GetPosts();
+        _posts = await apiService.GetPosts();
         StateHasChanged();
     }
 }
